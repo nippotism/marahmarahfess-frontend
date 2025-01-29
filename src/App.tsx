@@ -2,51 +2,13 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import { InfiniteMovingCards } from "./components/ui/infinite-moving-cards";
 import { PlaceholdersAndVanishInput } from './components/ui/placeholders-and-vanish-input';
-// import { HoverBorderGradient } from './components/ui/hover-border-gradient';
+import ThemeToggle from './components/ui/theme-toggle';
 import { Boxes } from './components/ui/background-boxes';
 import { CardBody, CardContainer, CardItem } from './components/ui/3d-card';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Toaster, toast } from 'sonner';
+import { HashLoader, PropagateLoader, RotateLoader } from 'react-spinners';
 import axios from 'axios';
-
-export function ThreeDCardDemo() {
-  return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-        >
-          Message
-        </CardItem>
-        <CardItem
-          translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white"
-        >
-          Make things float in air
-        </CardItem>
-        <div className="flex justify-between items-center mt-20">
-          <CardItem
-            translateZ={20}
-            translateX={-40}
-            as="button"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
-          >
-            From : John Doe
-          </CardItem>
-          <CardItem
-            translateZ={20}
-            translateX={40}
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
-          >
-            To : Jane Doe
-          </CardItem>
-        </div>
-      </CardBody>
-    </CardContainer>
-  );
-}
 
 
 
@@ -120,6 +82,9 @@ function App() {
   const [stage, setStage] = useState(0)
   const [increment, setIncrement] = useState(1)
   const [isOver, setIsOver] = useState(false)
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
 
   const fetchAndFormatData = async () => {
     try {
@@ -179,7 +144,7 @@ function App() {
 
     if(stage === 3){
       try{
-        axios.post('https://a55d-103-47-133-163.ngrok-free.app/api/messages?limit=5', {
+        axios.post('http://localhost:3000/api/messages', {
           name: nama,
           receiver: receiver,
           message: message
@@ -187,8 +152,12 @@ function App() {
         .then((response) => {
           console.log(response);
           console.log(response.data);
-          toast('Menfess berhasil terkirim')
-          // fetchAndFormatData();
+          toast('Menfess berhasil terkirim');
+          setStage(0);
+          setNama('');
+          setReceiver('');
+          setMessage('');
+          fetchAndFormatData();
         })
       } catch (err){
         console.error(err);
@@ -204,10 +173,10 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen relative w-full overflow-hidden bg-[#060606] flex flex-col items-center justify-center rounded-lg">
-        <div className="absolute inset-0 w-full h-full bg-[#060606] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+      <div className="min-h-screen relative w-full overflow-hidden bg-white dark:bg-[#181818] flex flex-col items-center justify-center rounded-lg">
+        <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-[#0f0f0f] z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
   
-        <Boxes className='fixed'/>
+        <Boxes className='fixed opacity-50 dark:opacity-100'/>
 
         <div className=" items-center relative flex flex-col justify-center z-20">
               <div>
@@ -217,12 +186,14 @@ function App() {
                   className: 'text-white bg-slate-800 border-gray-700',
                 }} 
               />
-                <div className="mt-8 fixed w-[35%] z-40 justify-center items-center">
-                    <PlaceholdersAndVanishInput
-                          placeholders={stage === 0 ? placeholder1 : stage === 1 ? placeholder2 : placeholder3}
-                          onChange={handleChange}
-                          onSubmit={onSubmit}
-                    />
+              
+                <div className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-[60%] md:w-[50%] lg:w-[35%] z-50 flex justify-center items-center mt-4">
+                  <PlaceholdersAndVanishInput
+                    placeholders={stage === 0 ? placeholder1 : stage === 1 ? placeholder2 : placeholder3}
+                    onChange={handleChange}
+                    onSubmit={onSubmit}
+                  />
+                  <ThemeToggle />
                 </div>
               {dataMenfess  && 
                 ( 
@@ -230,17 +201,20 @@ function App() {
                     dataLength={dataMenfess.length}
                     next={fetchAndFormatData}
                     hasMore={!isOver}
-                    loader={<h4>Loading...</h4>}
+                    loader={<div className='fixed bottom-1/2 left-1/2 z-50 '>
+                                <PropagateLoader color={theme === 'light' ? 'black' : 'white'} loading={true} />
+                            </div>
+                      }
                     endMessage={
                       <p style={{ textAlign: "center" }}>
                         <b>Yay! You have seen it all</b>
                       </p>
                     }
-                    className='overflow-y-scroll no-scrollbar'
+                    className='overflow-y-scroll no-scrollbar pb-20'
                   >
                   {dataMenfess.map((item) => (
                   <CardContainer key={item.id} className="inter-var -mb-36 z-50 mx-6">
-                    <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:bg-zinc-950 dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+                    <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:bg-zinc-950 dark:border-white/[0.2] border-black/[0.1] w-full sm:w-[30rem] h-auto rounded-xl p-6 border">
                       <CardItem
                         as="p"
                         translateZ="60"
