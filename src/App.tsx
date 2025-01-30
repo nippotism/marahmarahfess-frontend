@@ -7,7 +7,7 @@ import { CardBody, CardContainer, CardItem } from './components/ui/3d-card';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Toaster, toast } from 'sonner';
 import { PropagateLoader } from 'react-spinners';
-import axios from 'axios';
+import axios from 'axios';  
 
 
 
@@ -31,44 +31,6 @@ const placeholder3 = [
   "pesen apa buat dia?",
 ]
 
-const dataloading = [
-  {
-    id : '1',
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    name: "John Doe #1",
-    title: "Lorem Ipsum",
-  },
-  {
-    id : '2',
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    name: "John Doe #2",
-    title: "Lorem Ipsum",
-  },
-  {
-    id : '3',
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    name: "John Doe #3",
-    title: "Lorem Ipsum",
-  },
-  {
-    id : '4',
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    name: "John Doe #4",
-    title: "Lorem Ipsum",
-  },
-  {
-    id : '5',
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    name: "John Doe #5",
-    title: "Lorem Ipsum",
-  },
-
-]
 
 
 function App() {
@@ -81,7 +43,7 @@ function App() {
   const [stage, setStage] = useState(0)
   const [increment, setIncrement] = useState(1)
   const [isOver, setIsOver] = useState(false)
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const theme = localStorage.getItem("theme") || "light";
 
 
 
