@@ -4,6 +4,12 @@ import { PlaceholdersAndVanishInput } from './components/ui/placeholders-and-van
 import ThemeToggle from './components/ui/theme-toggle';
 import { Boxes } from './components/ui/background-boxes';
 import { CardBody, CardContainer, CardItem } from './components/ui/3d-card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./components/ui/tooltip"
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Toaster, toast } from 'sonner';
 import { PropagateLoader } from 'react-spinners';
@@ -30,6 +36,7 @@ const placeholder3 = [
   "apa yang bikin kamu kesel?",
   "pesen apa buat dia?",
 ]
+
 
 
 
@@ -147,7 +154,24 @@ function App() {
                   className: 'text-white bg-black border-gray-700',
                 }} 
               />
-              
+                <div className='fixed bottom-0 left-0 ml-6 mb-6 z-50'>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div className="text-white dark:text-black bg-black dark:bg-white rounded-full px-2 py-2 text-xl font-bold cursor-pointer">
+                      <svg className="w-6 h-6 dark:text-black text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+
+
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Sampaikan kemarahanmu ke orang lain<br/> isi namamu,<br/>isi nama orang yang kamu marahin,<br/>dan tulis pesanmu.</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                </div>
                 <div className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[90%] sm:w-[60%] md:w-[50%] lg:w-[35%] z-50 flex justify-center items-center mt-4">
                   <PlaceholdersAndVanishInput
                     placeholders={stage === 0 ? placeholder1 : stage === 1 ? placeholder2 : placeholder3}
