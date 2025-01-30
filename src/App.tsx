@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { InfiniteMovingCards } from "./components/ui/infinite-moving-cards";
 import { PlaceholdersAndVanishInput } from './components/ui/placeholders-and-vanish-input';
 import ThemeToggle from './components/ui/theme-toggle';
 import { Boxes } from './components/ui/background-boxes';
 import { CardBody, CardContainer, CardItem } from './components/ui/3d-card';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Toaster, toast } from 'sonner';
-import { HashLoader, PropagateLoader, RotateLoader } from 'react-spinners';
+import { PropagateLoader } from 'react-spinners';
 import axios from 'axios';
 
 
