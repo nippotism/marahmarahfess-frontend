@@ -174,7 +174,7 @@ function App() {
                     className='overflow-y-scroll no-scrollbar pb-20'
                   >
                   {dataMenfess.map((item) => (
-                  <CardContainer key={item.id} className="inter-var -mb-36 z-50 mx-6">
+                  <CardContainer key={item.id} className="inter-var -mb-36 z-50 min-w-[40vh]">
                     <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:bg-zinc-950 dark:border-white/[0.2] border-black/[0.1] w-full sm:w-[30rem] h-auto rounded-xl p-6 border">
                       <div className='flex justify-between items-center'>
                       <CardItem
