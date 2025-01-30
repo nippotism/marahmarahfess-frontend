@@ -88,7 +88,7 @@ function App() {
 
   const fetchAndFormatData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/messages?limit=${increment*5}`,
+      const response = await axios.get(`https://marahmarahfess-backend-production.up.railway.app/api/messages?limit=${increment*5}`,
         {
           headers: {
             "ngrok-skip-browser-warning": "69420",
@@ -144,7 +144,7 @@ function App() {
 
     if(stage === 3){
       try{
-        axios.post('http://localhost:3000/api/messages', {
+        axios.post('https://marahmarahfess-backend-production.up.railway.app/api/messages', {
           name: nama,
           receiver: receiver,
           message: message
@@ -183,7 +183,7 @@ function App() {
               <Toaster 
                 position="top-left"
                 toastOptions={{
-                  className: 'text-white bg-slate-800 border-gray-700',
+                  className: 'text-white bg-black border-gray-700',
                 }} 
               />
               
@@ -215,6 +215,7 @@ function App() {
                   {dataMenfess.map((item) => (
                   <CardContainer key={item.id} className="inter-var -mb-36 z-50 mx-6">
                     <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:bg-zinc-950 dark:border-white/[0.2] border-black/[0.1] w-full sm:w-[30rem] h-auto rounded-xl p-6 border">
+                      <div className='flex justify-between items-center'>
                       <CardItem
                         as="p"
                         translateZ="60"
@@ -222,6 +223,15 @@ function App() {
                       >
                         Pesan :
                       </CardItem>
+                      <CardItem
+                          translateZ={20}
+                          translateX={40}
+                          className=" dark:text-white text-black text-xs font-extralight"
+                        >
+                          {item.created_at}
+                      </CardItem>
+
+                      </div>
                       <CardItem
                         translateZ="50"
                         className="text-xl font-bold text-neutral-600 dark:text-white"
