@@ -24,10 +24,10 @@ export default function RepliesModal({ onSubmit }: RepliesModalProps) {
     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
       <div className="modal-box bg-white rounded-xl shadow-lg p-6 max-w-lg mx-auto">
         <h3 className="font-semibold text-xl text-center text-gray-800">
-          Add Menfess
+          Add Replied
         </h3>
         <p className="text-sm text-gray-500 text-center mt-2">
-          Fill the form below to send a menfess
+          Fill the form below to send a replies
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">

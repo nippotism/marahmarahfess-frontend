@@ -20,6 +20,7 @@ export default {
 		'reenie': ['Reenie Beanie', 'serif'],
 		'space-mono': ['Space Mono', 'serif'],
 		'jakarta-sans': ['Plus Jakarta Sans', 'serif'],
+		'rock-salt': ['Rock Salt', 'serif'],
 	},
   	extend: {
       animation: {
