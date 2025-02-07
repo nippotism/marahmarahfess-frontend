@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Home, Send } from "lucide-react"; // Icons for navbar
 import MenfessModal from "../components/ui/MenfessModal";
 import Loader from "@/components/ui/Loader";
+import Footer from "@/components/ui/Footer";
 import { MessageCircle } from "lucide-react";
 import { Toaster, toast } from "sonner";
 import { motion } from "framer-motion"; // Import motion for animation
@@ -33,7 +34,9 @@ function Index() {
   const fetchAndFormatData = async () => {
     try {
       const response = await axios.get(
-        `https://marahmarahfess-backend-production.up.railway.app/api/messages?limit=${increment * 5}`
+        `https://marahmarahfess-backend-production.up.railway.app/api/messages?limit=${
+          increment * 5
+        }`
       );
       if (response.data.length < increment * 5) {
         setIsOver(true);
@@ -105,10 +108,10 @@ function Index() {
       </nav>
 
       {/* Content */}
-      <div className="w-full pt-16 pb-16 font-jakarta-sans">
+      <div className="w-full pt-16 font-jakarta-sans">
         <Toaster position="bottom-right" />
         <motion.div
-          className="max-w-lg mx-auto px-4"
+          className="mx-auto px-4"
           initial={{ opacity: 0, y: 50 }} // Initial state: hidden and shifted down
           animate={{ opacity: 1, y: 0 }} // Final state: visible and in place
           transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -138,44 +141,46 @@ function Index() {
                 }
                 className="overflow-y-scroll no-scrollbar pb-20"
               >
-                {dataMenfess.map((item) => (
-                  <div
-                    key={item._id}
-                    className="bg-white my-4 rounded-lg shadow-md border border-gray-200"
-                  >
-                    {/* Post Header */}
-                    <div className="flex items-center px-4 py-2">
-                      <div className="w-10 h-10 bg-gray-300 rounded-full"></div>{" "}
-                      {/* Placeholder Avatar */}
-                      <div className="ml-3">
-                        <p className="font-semibold">
-                          {item.name || "Anonymous"}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-3">
+                  {dataMenfess.map((item) => (
+                    <div
+                      key={item._id}
+                      className="bg-white my-4 rounded-lg shadow-md border border-gray-200"
+                    >
+                      {/* Post Header */}
+                      <div className="flex items-center px-4 py-2">
+                        <div className="w-10 h-10 bg-gray-300 rounded-full"></div>{" "}
+                        {/* Placeholder Avatar */}
+                        <div className="ml-3">
+                          <p className="font-semibold">
+                            {item.name || "Anonymous"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Post Content (Message as Image) */}
+                      <div className="w-full aspect-square flex items-center justify-center bg-gray-100 p-4">
+                        <p className="text-5xl font-reenie text-gray-900 text-center break-words">
+                          {item.message}
                         </p>
                       </div>
-                    </div>
 
-                    {/* Post Content (Message as Image) */}
-                    <div className="w-full aspect-square flex items-center justify-center bg-gray-100 p-4">
-                      <p className="text-5xl font-reenie text-gray-900 text-center break-words">
-                        {item.message}
-                      </p>
+                      {/* Action Buttons */}
+                      <div className="flex justify-between items-center px-4 py-2 border-t">
+                        <p className="text-sm text-gray-500">
+                          To: {item.receiver}
+                        </p>
+                        <Link
+                          to={`/message/${item._id}`}
+                          className="flex items-center space-x-1 text-gray-600 hover:text-blue-500"
+                        >
+                          <MessageCircle className="w-5 h-5" />
+                          <span>Reply</span>
+                        </Link>
+                      </div>
                     </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex justify-between items-center px-4 py-2 border-t">
-                      <p className="text-sm text-gray-500">
-                        To: {item.receiver}
-                      </p>
-                      <Link
-                        to={`/message/${item._id}`}
-                        className="flex items-center space-x-1 text-gray-600 hover:text-blue-500"
-                      >
-                        <MessageCircle className="w-5 h-5" />
-                        <span>Reply</span>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  ))} 
+                </div>
               </InfiniteScroll>
             )}
           </div>
@@ -188,9 +193,10 @@ function Index() {
           />
         </motion.div>
       </div>
+      <Footer />
 
       {/* Bottom Navigation Bar (Mobile) */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t shadow-md flex justify-around py-3 md:hidden">
+      <div className="sticky bottom-0 left-0 w-full bg-white border-t shadow-md flex justify-around py-3 md:hidden">
         <Link
           to="/"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

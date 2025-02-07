@@ -29,7 +29,6 @@ function MessageDetail() {
 
   const [message, setMessage] = useState<Message | null>(null);
 
-
   const handlePostReplies = async (data: { name: string; reply: string }) => {
     try {
       const response = await axios.post(
@@ -67,7 +66,7 @@ function MessageDetail() {
     fetchMessage();
   }, [id]);
 
-  if (!message) return <p className="text-center mt-10">Loading...</p>;
+  if (!message) return;
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100">
