@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui";
 
 
 const defaultTheme = require("tailwindcss/defaultTheme");
@@ -15,6 +16,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+	fontFamily: {
+		'reenie': ['Reenie Beanie', 'serif'],
+		'space-mono': ['Space Mono', 'serif'],
+		'jakarta-sans': ['Plus Jakarta Sans', 'serif'],
+	},
   	extend: {
       animation: {
         scroll:
@@ -76,7 +82,9 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate"),
+  plugins: [
+	daisyui,
+	require("tailwindcss-animate"),
     addVariablesForColors,
   ],
 }
