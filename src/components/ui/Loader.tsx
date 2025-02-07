@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { LampDemo } from "./Lamp";
 
 export default function Loader() {

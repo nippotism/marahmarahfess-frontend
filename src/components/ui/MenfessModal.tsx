@@ -9,7 +9,7 @@ export default function MenfessModal({ onSubmit }: MenfessModalProps) {
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!receiver || !message) {
       alert("Receiver and message are required!");

@@ -8,7 +8,7 @@ export default function RepliesModal({ onSubmit }: RepliesModalProps) {
   const [name, setName] = useState("");
   const [reply, setReply] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ name: name || "Anonim", reply });
 

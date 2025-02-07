@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BaseLayout from "@/layouts/BaseLayout";
 import axios from "axios";
-import { Send } from "lucide-react";
 import { Toaster, toast } from "sonner";
 import RepliesModal from "@/components/ui/RepliesModal";
 
@@ -64,6 +63,7 @@ export default function MessageDetail() {
 
   return (
     <BaseLayout>
+      <Toaster position="bottom-right"/>
       <div className="flex flex-col items-center p-4">
         {/* Message (Like Instagram Post) */}
         <div className="bg-white w-full max-w-md rounded-lg shadow-md border border-gray-200">

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Home, Send, User } from "lucide-react"; // Icons for navbar
+import { Home, Send} from "lucide-react"; // Icons for navbar
 import { Link } from "react-router-dom";
 
 interface BaseLayoutProps {
