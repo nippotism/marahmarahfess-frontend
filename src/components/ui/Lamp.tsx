@@ -1,11 +1,25 @@
 "use client";
 import React from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function LampDemo() {
+  const [max, setMax] = useState("20rem"); // Default width for mobile
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMax(window.innerWidth >= 768 ? "30rem" : "20rem"); // Desktop: 30rem, Mobile: 15rem
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <LampContainer>
+    <LampContainer max={max}>
       <motion.h1
         initial={{ opacity: 0.5, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -25,9 +39,11 @@ export function LampDemo() {
 export const LampContainer = ({
   children,
   className,
+  max,
 }: {
   children: React.ReactNode;
   className?: string;
+  max: string;
 }) => {
   return (
     <div
@@ -39,7 +55,7 @@ export const LampContainer = ({
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
+          whileInView={{ opacity: 1, width: max }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -55,7 +71,7 @@ export const LampContainer = ({
         </motion.div>
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
+          whileInView={{ opacity: 1, width: max }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -74,7 +90,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-50 h-36 w-[28rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-50 blur-3xl"></div>
         <motion.div
           initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
+          whileInView={{ width: max }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -84,7 +100,7 @@ export const LampContainer = ({
         ></motion.div>
         <motion.div
           initial={{ width: "15rem" }}
-          whileInView={{ width: "30rem" }}
+          whileInView={{ width: max }}
           transition={{
             delay: 0.3,
             duration: 0.8,

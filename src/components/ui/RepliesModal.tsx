@@ -1,23 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface RepliesModalProps {
+  isOpen: boolean;
+  onClose: () => void;
   onSubmit: (data: { name: string; reply: string }) => void;
 }
 
-export default function RepliesModal({ onSubmit }: RepliesModalProps) {
+export default function RepliesModal({
+  isOpen,
+  onClose,
+  onSubmit,
+}: RepliesModalProps) {
   const [name, setName] = useState("");
   const [reply, setReply] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const modal = document.getElementById("my_modal_5") as HTMLDialogElement;
+    if (isOpen) {
+      modal?.showModal();
+    } else {
+      modal?.close();
+    }
+  }, [isOpen]);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({ name: name || "Anonim", reply });
-
-    // Reset form
-    setName("");
-    setReply("");
-
     // Close modal
-    (document.getElementById("my_modal_5") as HTMLDialogElement)?.close();
+    onClose();
   };
 
   return (
@@ -51,15 +61,8 @@ export default function RepliesModal({ onSubmit }: RepliesModalProps) {
           <div className="modal-action flex justify-between items-center">
             <button
               type="button"
-              className="btn btn-ghost text-gray-600 hover:text-gray-800 border-none rounded-md focus:ring-2 focus:ring-gray-400"
-              onClick={() => {
-                const modal = document.getElementById(
-                  "my_modal_5"
-                ) as HTMLDialogElement;
-                if (modal) {
-                  modal.close();
-                }
-              }}
+              className="btn btn-ghost text-gray-600 hover:text-gray-800"
+              onClick={onClose}
             >
               Cancel
             </button>
