@@ -166,8 +166,8 @@ function MessageDetail() {
         </div>
       </div>
         ):(
-          <div className="flex items-center justify-center h-screen w-screen bg-white">
-            <PulseLoader color="#f3f4f6" size={15} />
+          <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
+            <PulseLoader color="black" size={15} />
           </div>
         )
         }
