@@ -3,16 +3,25 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import RepliesModal from "../components/ui/RepliesModal";
+import { PulseLoader } from "react-spinners";
+
+interface Message {
+  message: string;
+  name: string;
+  receiver: string;
+  replies: { _id: string; name: string; reply: string }[];
+}
 
 function MessageDetail() {
   const { id } = useParams();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal State
+  const [message, setMessage] = useState<Message | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
-    };
+    };  
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -20,14 +29,8 @@ function MessageDetail() {
     };
   }, []);
 
-  interface Message {
-    message: string;
-    name: string;
-    receiver: string;
-    replies: { _id: string; name: string; reply: string }[];
-  }
+ 
 
-  const [message, setMessage] = useState<Message | null>(null);
 
   const handlePostReplies = async (data: { name: string; reply: string }) => {
     try {
@@ -50,7 +53,7 @@ function MessageDetail() {
   const fetchMessage = async () => {
     try {
       const response = await fetch(
-        `https://marahmarahfess-backend-production.up.railway.app/api/messages/${id}/replies`
+        `https://marahmarahfess-backend-production.up.railway.app/api/messages/${id}`
       );
       if (!response.ok) throw new Error("Failed to fetch message");
 
@@ -66,7 +69,7 @@ function MessageDetail() {
     fetchMessage();
   }, [id]);
 
-  if (!message) return;
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gray-100">
@@ -85,7 +88,9 @@ function MessageDetail() {
       </nav>
 
       {/* Content */}
-      <div className="w-full pt-16 pb-16 font-jakarta-sans">
+      {message ? 
+      (
+        <div className="w-full pt-16 pb-16 font-jakarta-sans">
         <Toaster position="bottom-right" />
         <div className="flex flex-col items-center p-4">
           {/* Message (Like Instagram Post) */}
@@ -159,6 +164,12 @@ function MessageDetail() {
           />
         </div>
       </div>
+        ):(
+          <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
+            <PulseLoader color="black" size={15} />
+          </div>
+        )
+        }
     </div>
   );
 }
