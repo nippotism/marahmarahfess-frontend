@@ -30,7 +30,7 @@ export function LampDemo() {
         }}
         className="mt-8 bg-gradient-to-br text-2xl font-jakarta-sans from-slate-300 to-slate-500 py-4 bg-clip-text text-center md:text-4xl font-medium tracking-tight text-transparent lg:text-7xl"
       >
-        We listen, we don't judge? <br /> Undip Edition
+         We listen, we don't judge? <br /> <span className=" text-3xl font-light italic ">- Dipo Edition -</span>
       </motion.h1>
     </LampContainer>
   );
