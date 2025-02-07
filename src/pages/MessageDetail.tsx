@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import RepliesModal from "../components/ui/RepliesModal";
+import { PulseLoader } from "react-spinners";
 
 interface Message {
   message: string;
@@ -17,14 +18,10 @@ function MessageDetail() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal State
   const [message, setMessage] = useState<Message | null>(null);
 
-  useEffect (() => {
-    fetchMessage();
-  }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
-    };
+    };  
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -92,7 +89,8 @@ function MessageDetail() {
       </nav>
 
       {/* Content */}
-      {message && (
+      {message ? 
+      (
         <div className="w-full pt-16 pb-16 font-jakarta-sans">
         <Toaster position="bottom-right" />
         <div className="flex flex-col items-center p-4">
@@ -167,7 +165,12 @@ function MessageDetail() {
           />
         </div>
       </div>
-        )}
+        ):(
+          <div className="flex items-center justify-center h-screen w-screen bg-white">
+            <PulseLoader color="#f3f4f6" size={15} />
+          </div>
+        )
+        }
     </div>
   );
 }
