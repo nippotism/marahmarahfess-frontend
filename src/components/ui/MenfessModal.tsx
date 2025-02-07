@@ -77,7 +77,7 @@ export default function MenfessModal({
             </button>
             <button
               type="submit"
-              className="btn btn-primary text-white bg-blue-500 hover:bg-blue-600 px-6 py-2"
+              className="btn btn-primary text-white bg-blue-900 hover:bg-blue-700 px-6 py-2"
             >
               Send
             </button>

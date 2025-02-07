@@ -5,6 +5,7 @@ import { Home, Send } from "lucide-react"; // Icons for navbar
 import MenfessModal from "../components/ui/MenfessModal";
 import Loader from "@/components/ui/Loader";
 import Footer from "@/components/ui/Footer";
+import { Cover } from "@/components/ui/cover";
 import { MessageCircle } from "lucide-react";
 import { Toaster, toast } from "sonner";
 import { motion } from "framer-motion"; // Import motion for animation
@@ -100,10 +101,23 @@ function Index() {
           DipoFess
         </Link>
         <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-black hidden md:block text-white px-4 py-1 rounded-full text-sm"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+          className="bg-blue-900 hidden md:block text-white px-3 py-3 rounded-full text-sm"
         >
-          + Kirim Menfess
+          <motion.svg
+            className="w-8 h-8 text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: isModalOpen ? 90 : 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7 7V5" />
+          </motion.svg>
         </button>
       </nav>
 
@@ -118,12 +132,12 @@ function Index() {
           style={{ visibility: isVisible ? "visible" : "hidden" }} // Control visibility based on state
         >
           {/* Header */}
-          <div className="text-center py-4 border-b">
-            <h1 className="font-bold text-xl">Menfess Rakyat Undip Raya</h1>
+          <div className="text-center py-4  my-8 lg:my-28">
+            <h1 className=" font-rock-salt text-3xl lg:text-6xl break-words tracking-widest">Menfess <Cover>Rakyat Undip</Cover> Raya.</h1>
           </div>
 
           {/* Instagram-Style Post Feed */}
-          <div className="mt-4 space-y-6">
+          <div className="mt-4 space-y-6 border-t border-gray-300">
             {dataMenfess && (
               <InfiniteScroll
                 dataLength={dataMenfess.length}
