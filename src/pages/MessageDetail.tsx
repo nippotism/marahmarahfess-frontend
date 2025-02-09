@@ -5,10 +5,24 @@ import { Toaster, toast } from "sonner";
 import RepliesModal from "../components/ui/RepliesModal";
 import { PulseLoader } from "react-spinners";
 
+export const LoveIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M18.8 9.91c-1.13 0-2.14.55-2.77 1.39a3.466 3.466 0 0 0-2.77-1.39c-1.91 0-3.46 1.56-3.46 3.48 0 .74.12 1.43.32 2.06.98 3.11 4.02 4.98 5.52 5.49.21.07.56.07.77 0 1.5-.51 4.54-2.37 5.52-5.49.21-.64.32-1.32.32-2.06a3.457 3.457 0 0 0-3.45-3.48Z" fill="#f972db"></path><path d="M20.75 8.342c0 .23-.23.38-.45.32a4.81 4.81 0 0 0-3.95.74c-.22.16-.52.16-.73 0a4.65 4.65 0 0 0-2.76-.9c-2.58 0-4.68 2.11-4.68 4.71 0 2.82 1.35 4.93 2.71 6.34.07.07.01.19-.08.15C8.08 18.772 2 14.912 2 8.342c0-2.9 2.33-5.24 5.21-5.24 1.71 0 3.22.82 4.17 2.09a5.218 5.218 0 0 1 4.17-2.09c2.87 0 5.2 2.34 5.2 5.24Z" fill="#ff48ce"></path></svg>
+);
+
+export const DefaultIcon = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M16 2H8C4 2 2 4 2 8v13c0 .55.45 1 1 1h13c4 0 6-2 6-6V8c0-4-2-6-6-6Zm-2 13.25H7c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h7c.41 0 .75.34.75.75s-.34.75-.75.75Zm3-5H7c-.41 0-.75-.34-.75-.75s.34-.75.75-.75h10c.41 0 .75.34.75.75s-.34.75-.75.75Z" fill="#2a4365"></path></svg>
+);
+
+
+export const AngryIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M21.76 15.92 15.36 4.4C14.5 2.85 13.31 2 12 2s-2.5.85-3.36 2.4l-6.4 11.52c-.81 1.47-.9 2.88-.25 3.99.65 1.11 1.93 1.72 3.61 1.72h12.8c1.68 0 2.96-.61 3.61-1.72.65-1.11.56-2.53-.25-3.99ZM11.25 9c0-.41.34-.75.75-.75s.75.34.75.75v5c0 .41-.34.75-.75.75s-.75-.34-.75-.75V9Zm1.46 8.71-.15.12c-.06.04-.12.07-.18.09-.06.03-.12.05-.19.06-.06.01-.13.02-.19.02s-.13-.01-.2-.02a.636.636 0 0 1-.18-.06.757.757 0 0 1-.18-.09l-.15-.12c-.18-.19-.29-.45-.29-.71 0-.26.11-.52.29-.71l.15-.12c.06-.04.12-.07.18-.09.06-.03.12-.05.18-.06.13-.03.27-.03.39 0 .07.01.13.03.19.06.06.02.12.05.18.09l.15.12c.18.19.29.45.29.71 0 .26-.11.52-.29.71Z" fill="#ee0d0d"></path></svg>
+);
+
 interface Message {
   message: string;
   name: string;
   receiver: string;
+  type: string;
   replies: { _id: string; name: string; reply: string }[];
 }
 
@@ -97,13 +111,15 @@ function MessageDetail() {
           <div className="bg-white w-full max-w-md rounded-lg shadow-md border border-gray-200">
             {/* Sender Info */}
             <div className="flex items-center p-4 border-b">
-              <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
+              <div >
+                {message.type === 'lovfess' ? <LoveIcon /> : message.type === 'marahfess' ? <AngryIcon /> : <DefaultIcon />}
+              </div>
               <p className="ml-3 font-semibold text-gray-800">{message.name}</p>
             </div>
 
             {/* Message Content (Like Image in Instagram) */}
             <div className="p-5 min-h-[300px] flex items-center justify-center">
-              <h1 className="text-3xl text-center font-reenie text-gray-900">
+              <h1 className={`${message.type === 'lovfess' ? 'font-homemade-apple text-4xl italic my-1': message.type === 'marahfess' ? 'font-rock-salt text-3xl font-bold' : 'text-5xl font-reenie'} text-gray-900 text-center `}>
                 {message.message}
               </h1>
             </div>

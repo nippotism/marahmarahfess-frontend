@@ -21,6 +21,7 @@ export default {
 		'space-mono': ['Space Mono', 'serif'],
 		'jakarta-sans': ['Plus Jakarta Sans', 'serif'],
 		'rock-salt': ['Rock Salt', 'serif'],
+		'homemade-apple': ['Homemade Apple', 'serif'],
 	},
   	extend: {
       animation: {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 interface MenfessModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: { name: string; receiver: string; message: string }) => void;
+  onSubmit: (data: { name: string; receiver: string; message: string; type:string }) => void;
 }
 
 export default function MenfessModal({
@@ -14,6 +14,7 @@ export default function MenfessModal({
   const [name, setName] = useState("");
   const [receiver, setReceiver] = useState("");
   const [message, setMessage] = useState("");
+  const [type, setType] = useState("Type");
 
   useEffect(() => {
     const modal = document.getElementById("my_modal_5") as HTMLDialogElement;
@@ -26,7 +27,7 @@ export default function MenfessModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ name, receiver, message });
+    onSubmit({ name, receiver, message, type });
     onClose();
   };
 
@@ -66,6 +67,21 @@ export default function MenfessModal({
             rows={4}
             required
           ></textarea>
+
+          <details className="dropdown -mt-4">
+            <summary className="btn m-1 bg-gray-300 hover:bg-gray-200 hover:border-none text-gray-900 border-white rounded-full">{type}</summary>
+            <ul className="menu dropdown-content bg-white rounded-box z-[1] w-52 p-2 shadow">
+                <li>
+                <a onClick={() => setType("biasafess")}>Biasafess</a>
+              </li>
+              <li>
+                <a onClick={() => setType("marahfess")}>Marahfess</a>
+              </li>
+              <li>
+                <a onClick={() => setType("lovfess")}>Lovfess</a>
+              </li>
+            </ul>
+          </details>
 
           <div className="modal-action flex justify-between items-center">
             <button
