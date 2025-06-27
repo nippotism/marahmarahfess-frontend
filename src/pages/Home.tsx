@@ -59,7 +59,7 @@ function Index() {
   const fetchAndFormatData = async () => {
     try {
       const response = await axios.get(
-        `https://marahmarahfess-backend-production.up.railway.app/api/messages?limit=${
+        `https://dipofess-backend-jljfdkgft-yooschs-projects.vercel.app/api/messages?limit=${
           increment * 5
         }`
       );
@@ -82,7 +82,7 @@ function Index() {
   }) => {
     try {
       const response = await axios.post(
-        "https://marahmarahfess-backend-production.up.railway.app/api/messages",
+        "https://dipofess-backend-jljfdkgft-yooschs-projects.vercel.app/api/messages",
         data,
         {
           headers: { "Content-Type": "application/json" },

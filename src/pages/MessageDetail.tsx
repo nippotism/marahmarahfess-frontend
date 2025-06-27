@@ -49,7 +49,7 @@ function MessageDetail() {
   const handlePostReplies = async (data: { name: string; reply: string }) => {
     try {
       const response = await axios.post(
-        `https://marahmarahfess-backend-production.up.railway.app/api/messages/${id}/reply`,
+        `https://dipofess-backend-jljfdkgft-yooschs-projects.vercel.app/api/messages/${id}/reply`,
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ function MessageDetail() {
   const fetchMessage = async () => {
     try {
       const response = await fetch(
-        `https://marahmarahfess-backend-production.up.railway.app/api/messages/${id}`
+        `https://dipofess-backend-jljfdkgft-yooschs-projects.vercel.app/api/messages/${id}`
       );
       if (!response.ok) throw new Error("Failed to fetch message");
 
